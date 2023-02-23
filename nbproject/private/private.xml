@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/wamp/www/Noticias/page/404.phtml</file>
+            <file>file:/C:/wamp/www/Noticias/model/Noticia.php</file>
+            <file>file:/C:/wamp/www/Noticias/layout/index.phtml</file>
+            <file>file:/C:/wamp/www/Noticias/mapping/NoticiaMapper.php</file>
+            <file>file:/C:/wamp/www/Noticias/dao/NoticiaDao.php</file>
+            <file>file:/C:/wamp/www/Noticias/validation/NoticiaValidator.php</file>
+            <file>file:/C:/wamp/www/Noticias/page/list.php</file>
+            <file>file:/C:/wamp/www/Noticias/page/500.phtml</file>
+            <file>file:/C:/wamp/www/Noticias/page/detail.php</file>
+            <file>file:/C:/wamp/www/Noticias/page/detail.phtml</file>
+            <file>file:/C:/wamp/www/Noticias/page/list.phtml</file>
+        </group>
+    </open-files>
+</project-private>

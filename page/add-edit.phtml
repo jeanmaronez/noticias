@@ -1,0 +1,91 @@
+<?php
+
+function error_field($title, array $errors) {
+    foreach ($errors as $error) {
+        /* @var $error Error */
+        if ($error->getSource() == $title) {
+            return ' error-field';
+        }
+    }
+    return '';
+}
+
+?>
+
+<h1>
+    <?php if ($edit): ?>
+        <?php echo Utils::escape($noticia->getTitle()); ?>
+    <?php else: ?>
+        Adicionar nova NOTICIA
+    <?php endif; ?>
+</h1>
+
+<?php if (!empty($errors)): ?>
+<ul class="errors">
+    <?php foreach ($errors as $error): ?>
+        <?php /* @var $error Error */ ?>
+        <li><?php echo $error->getMessage(); ?></li>
+    <?php endforeach; ?>
+</ul>
+<?php endif; ?>
+
+<form action="#" method="post">
+    <fieldset>
+        <div class="field">
+            <label>Título:</label>
+            <input type="text" name="noticia[title]" value="<?php echo Utils::escape($noticia->getTitle()); ?>"
+                   class="text<?php echo error_field('title', $errors); ?>"/>
+        </div>
+        <div class="field">
+            <label>Programada para:</label>
+            <input type="text" name="noticia[due_on_date]" value="<?php echo Utils::escape($noticia->getDueOn()->format('Y-n-j')); ?>"
+                   class="text datepicker<?php echo error_field('due_on', $errors); ?>" />
+            &nbsp;
+            <select name="noticia[due_on_hour]">
+            <?php for ($i = 0; $i < 24; ++$i): ?>
+                <option value="<?php echo $i; ?>"
+                        <?php if ($noticia->getDueOn() && $i == $noticia->getDueOn()->format('H')): ?>
+                            selected="selected"
+                        <?php endif; ?>
+                        ><?php echo str_pad($i, 2, '0', STR_PAD_LEFT); ?></option>
+            <?php endfor; ?>
+            </select>
+            :
+            <select name="noticia[due_on_minute]">
+            <?php for ($i = 0; $i < 60; $i = $i + 15): ?>
+                <option value="<?php echo $i; ?>"
+                        <?php if ($noticia->getDueOn() && $i == $noticia->getDueOn()->format('i')): ?>
+                            selected="selected"
+                        <?php endif; ?>
+                        ><?php echo str_pad($i, 2, '0', STR_PAD_LEFT); ?></option>
+            <?php endfor; ?>
+            </select>
+        </div>
+        <div class="field">
+            <label>Prioridade:</label>
+            <select name="noticia[priority]">
+            <?php foreach (Noticia::allPriorities() as $priority): ?>
+                <option value="<?php echo $priority; ?>"
+                        <?php if ($priority == $noticia->getPriority()): ?>
+                            selected="selected"
+                        <?php endif; ?>
+                        ><?php echo $priority; ?></option>
+            <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="field">
+            <label>Texto:</label>
+            <textarea name="noticia[description]" cols="1" rows="1"
+                      class="<?php echo error_field('description', $errors); ?>"><?php echo Utils::escape($noticia->getDescription()); ?></textarea>
+        </div>
+        <div class="field">
+            <label>Comentário do Autor:</label>
+            <textarea name="noticia[comment]" cols="1" rows="1"
+                      class="<?php echo error_field('comment', $errors); ?>"><?php echo Utils::escape($noticia->getComment()); ?></textarea>
+        </div>
+        <div class="wrapper">
+            <input type="submit" name="cancel" value="CANCELAR" class="submit" />
+            <input type="submit" name="save" value="<?php echo $edit ? 'EDITAR' : 'SALVAR'; ?>" class="submit" />
+        </div>
+    </fieldset>
+</form>

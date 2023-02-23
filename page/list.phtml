@@ -1,0 +1,31 @@
+<h1>
+    <img src="img/status/<?php echo $status; ?>.png" alt="" title="<?php echo Utils::capitalize($status); ?>" class="icon" />
+    <?php echo $title; ?>
+</h1>
+
+<?php if (empty($noticias)): ?>
+    <p>Nenhuma NOTICIA encontrada.</p>
+<?php else: ?>
+    <ul class="list">
+        <?php foreach ($noticias as $noticia): ?>
+            <?php /* @var $noticia Noticia */ ?>
+            <?php $tooLate = $status == Noticia::STATUS_PENDING && $noticia->getDueOn() < new DateTime(); ?>
+            <li>
+                <?php if ($tooLate): ?>
+                    <img src="img/exclamation.png" alt="" title="ATRASADA!" />
+                <?php endif; ?>
+                <img src="img/priority/<?php echo $noticia->getPriority(); ?>.png" alt="Priority <?php echo $noticia->getPriority(); ?>" title="Priority <?php echo $noticia->getPriority(); ?>" />
+                <h3><a href="<?php echo Utils::createLink('detail', array('id' => $noticia->getId())) ?>"><?php echo Utils::escape($noticia->getTitle()); ?></a></h3>
+                <?php if ($noticia->getDescription()): ?>
+                    <p class="description"><?php echo Utils::escape($noticia->getDescription()); ?></p>
+                <?php endif; ?>
+                <p><span class="label">Criada em:</span> <?php echo Utils::escape(Utils::formatDateTime($noticia->getCreatedOn())); ?></p>
+                <p><span class="label">Programada para:</span>
+                    <?php if ($tooLate): ?><span class="too-late"><?php endif; ?>
+                    <?php echo Utils::escape(Utils::formatDateTime($noticia->getDueOn())); ?>
+                    <?php if ($tooLate): ?></span><?php endif; ?>
+                </p>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>

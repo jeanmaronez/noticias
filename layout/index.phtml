@@ -1,0 +1,71 @@
+<?php
+
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>NOTICIA List - sample application for NetBeans IDE</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <meta name="description" content="NOTICIA List - sample application for NetBeans IDE" />
+    <meta name="keywords" content="NetBeans, PHP" />
+    <meta name="author" content="NetBeans PHP team" />
+
+    <link type="text/css" href="css/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/layout.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+
+</head>
+<body id="page">
+    <div class="tail-top-right"></div>
+    <div id="main">
+        <!-- header -->
+        <div id="header"></div>
+        <!-- content -->
+        <div id="content">
+            <div class="wrapper">
+                <div class="col-1">
+                    <div class="box">
+                        <div class="inner">                            
+                            <ul class="list">
+                                <li><span><a href="<?php echo Utils::createLink('home'); ?>">Home</a></span></li>
+                                <li><span><a href="<?php echo Utils::createLink('list', array('status' => Noticia::STATUS_PENDING)); ?>"
+                                             ><img src="img/status/PENDENTE.png" alt="" title="Pendentes NOTICIAs" class="icon" />Noticias Pendentes</a></span></li>
+                                <li><span><a href="<?php echo Utils::createLink('list', array('status' => Noticia::STATUS_DONE)); ?>"
+                                             ><img src="img/status/LIBERADA.png" alt="" title="Done NOTICIAs" class="icon" />Noticias Liberadas</a></span></li>
+                                <li><span><a href="<?php echo Utils::createLink('list', array('status' => Noticia::STATUS_VOIDED)); ?>"
+                                             ><img src="img/status/NEGADA.png" alt="" title="Voided NOTICIAs" class="icon" />Noticias Negadas</a></span></li>
+                                <li class="last"><span><a href="<?php echo Utils::createLink('add-edit'); ?>"
+                                             ><img src="img/action/add.png" alt="" title="Add NOTICIA" class="icon" />Adicionar Noticia</a></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="indent">
+                        <?php if ($flashes): ?>
+                            <ul id="flashes">
+                            <?php foreach ($flashes as $flash): ?>
+                                <li><?php echo $flash; ?></li>
+                            <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+
+                        <?php require $template; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer -->
+        <div id="footer">
+            <div class="indent">
+                <div class="fleft"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
